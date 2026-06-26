@@ -40,21 +40,21 @@ namespace EShop.ProductApi.Migrations
                 keyColumn: "CategoryId",
                 keyValue: 1,
                 column: "Name",
-                value: "Diversos");
+                value: "Miscellaneous");
 
             migrationBuilder.UpdateData(
                 table: "Categories",
                 keyColumn: "CategoryId",
                 keyValue: 2,
                 column: "Name",
-                value: "Material Escolar");
+                value: "School Supplies");
 
             migrationBuilder.UpdateData(
                 table: "Categories",
                 keyColumn: "CategoryId",
                 keyValue: 3,
                 column: "Name",
-                value: "Acessórios");
+                value: "Accessories");
         }
     }
 }
