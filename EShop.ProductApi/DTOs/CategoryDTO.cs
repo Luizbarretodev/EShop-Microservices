@@ -1,6 +1,15 @@
-﻿namespace EShop.ProductApi.DTOs
+﻿using EShop.ProductApi.Models;
+using System.ComponentModel.DataAnnotations;
+
+namespace EShop.ProductApi.DTOs;
+public class CategoryDTO
 {
-    public class CategoryDTO
-    {
-    }
+    public int CategoryId { get; set; }
+
+    [Required(ErrorMessage = "The name is required")]
+    [MinLength(3)]
+    [MaxLength(100)]
+    public string? Name { get; set; }
+    public ICollection<Product>? Products { get; set; }
 }
+
