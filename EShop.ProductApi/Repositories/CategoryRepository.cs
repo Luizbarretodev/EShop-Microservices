@@ -50,6 +50,9 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<Category> Delete(int id)
     {
-        throw new NotImplementedException();
+        var category = await GetById(id);
+        _context.Categories.Remove(category);
+        await _context.SaveChangesAsync();
+        return category;
     }
 }

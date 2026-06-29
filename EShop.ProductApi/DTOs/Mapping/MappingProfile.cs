@@ -1,6 +1,13 @@
-﻿namespace EShop.ProductApi.DTOs.Mapping
+﻿using AutoMapper;
+using EShop.ProductApi.Models;
+
+namespace EShop.ProductApi.DTOs.Mapping;
+public class MappingProfile : Profile
 {
-    public class MappingProfile
+    public MappingProfile()
     {
+        CreateMap<Category,CategoryDTO>().ReverseMap();
+        CreateMap<Product,ProductDTO>().ReverseMap();
     }
 }
+
