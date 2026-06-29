@@ -34,23 +34,22 @@ public class CategoryService : ICategoryService
         return _mapper.Map<CategoryDTO>(categoriesEntity);
     }
 
-
     public async Task AddCategory(CategoryDTO categoryDTO)
     {
-        var categoryEntity = _mapper.Map<Category>(categoryDTO);
-        await _categoryRepository.Create(categoryEntity);
-        categoryDTO.CategoryId = categoryEntity.CategoryId;
+        var categoriesEntity = _mapper.Map<Category>(categoryDTO);
+        await _categoryRepository.Create(categoriesEntity);
+        categoryDTO.CategoryId = categoriesEntity.CategoryId;
     }
 
     public async Task UpdateCategory(CategoryDTO categoryDTO)
     {
-        var categoryEntity = _mapper.Map<Category>(categoryDTO);
-        await _categoryRepository.Update(categoryEntity);
+        var categoriesEntity = _mapper.Map<Category>(categoryDTO);
+        await _categoryRepository.Update(categoriesEntity);
     }
 
     public async Task DeleteCategory(int id)
     {
-        var categoryEntity = GetCategoryById(id).Result;
-        await _categoryRepository.Delete(categoryEntity.CategoryId);
+        var categoriesEntity = GetCategoryById(id).Result;
+        await _categoryRepository.Delete(categoriesEntity.CategoryId);
     }
 }
