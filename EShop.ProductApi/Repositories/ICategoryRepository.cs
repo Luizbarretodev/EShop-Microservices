@@ -4,7 +4,7 @@ namespace EShop.ProductApi.Repositories;
 
 public interface ICategoryRepository
 {
-    Task<IEnumerable<Category>> GetCategories();
+    Task<IEnumerable<Category>> GetAll();
 
     Task<IEnumerable<Category>> GetCategoriesProducts();
 

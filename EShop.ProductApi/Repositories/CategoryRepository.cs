@@ -13,7 +13,7 @@ public class CategoryRepository : ICategoryRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Category>> GetCategories()
+    public async Task<IEnumerable<Category>> GetAll()
     {
         //Não é recomendávek usar ToListAsync pois ele retorna todas as categorias na memoria
         //estamos utilizando apenas por ter poucas categorias
