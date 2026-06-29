@@ -16,3 +16,4 @@ public interface ICategoryRepository
 
     Task<Category> Delete(int id);
 }
+
