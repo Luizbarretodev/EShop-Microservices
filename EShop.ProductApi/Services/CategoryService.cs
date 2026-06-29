@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EShop.ProductApi.DTOs;
+using EShop.ProductApi.Models;
 using EShop.ProductApi.Repositories;
 
 namespace EShop.ProductApi.Services;
@@ -15,34 +16,41 @@ public class CategoryService : ICategoryService
         _mapper = mapper;
     }
 
-    public Task<IEnumerable<CategoryDTO>> GetCategories()
+    public async Task<IEnumerable<CategoryDTO>> GetCategories()
     {
-        throw new NotImplementedException();
+        var categoriesEntity = await _categoryRepository.GetAll();
+        return _mapper.Map<IEnumerable<CategoryDTO>>(categoriesEntity);
     }
 
-    public Task<IEnumerable<CategoryDTO>> GetCategoriesProducts()
+    public async Task<IEnumerable<CategoryDTO>> GetCategoriesProducts()
     {
-        throw new NotImplementedException();
+        var categoriesEntity = await _categoryRepository.GetCategoriesProducts();
+        return _mapper.Map<IEnumerable<CategoryDTO>>(categoriesEntity);
     }
 
-    public Task<CategoryDTO> GetCategoryById(int id)
+    public async Task<CategoryDTO> GetCategoryById(int id)
     {
-        throw new NotImplementedException();
+        var categoriesEntity = await _categoryRepository.GetById(id);
+        return _mapper.Map<CategoryDTO>(categoriesEntity);
     }
 
 
-    public Task AddCategory(CategoryDTO categoryDTO)
+    public async Task AddCategory(CategoryDTO categoryDTO)
     {
-        throw new NotImplementedException();
+        var categoryEntity = _mapper.Map<Category>(categoryDTO);
+        await _categoryRepository.Create(categoryEntity);
+        categoryDTO.CategoryId = categoryEntity.CategoryId;
     }
 
-    public Task UpdateCategory(CategoryDTO categoryDTO)
+    public async Task UpdateCategory(CategoryDTO categoryDTO)
     {
-        throw new NotImplementedException();
+        var categoryEntity = _mapper.Map<Category>(categoryDTO);
+        await _categoryRepository.Update(categoryEntity);
     }
 
-    public Task DeleteCategory(int id)
+    public async Task DeleteCategory(int id)
     {
-        throw new NotImplementedException();
+        var categoryEntity = GetCategoryById(id).Result;
+        await _categoryRepository.Delete(categoryEntity.CategoryId);
     }
 }
