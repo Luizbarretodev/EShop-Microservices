@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EShop.ProductApi.DTOs;
+using EShop.ProductApi.Models;
 using EShop.ProductApi.Repositories;
 
 namespace EShop.ProductApi.Services;
@@ -15,27 +16,34 @@ public class ProductService : IProductService
         _mapper = mapper;
     }
 
-    public Task<IEnumerable<ProductDTO>> GetProducts()
+    public async Task<IEnumerable<ProductDTO>> GetProducts()
     {
-        throw new NotImplementedException();
+        var productsEntity = await _productRepository.GetAll();
+        return _mapper.Map<IEnumerable<ProductDTO>>(productsEntity);
     }
 
-    public Task<ProductDTO> GetProductById(int id)
+    public async Task<ProductDTO> GetProductById(int id)
     {
-        throw new NotImplementedException();
+        var productsEntity = await _productRepository.GetById(id);
+        return _mapper.Map<ProductDTO>(productsEntity);
     }
 
-    public Task AddProduct(ProductDTO productDTO)
+    public async Task AddProduct(ProductDTO productDTO)
     {
-        throw new NotImplementedException();
+        var productsEntity = _mapper.Map<Product>(productDTO);
+        await _productRepository.Create(productsEntity);
+
+        productDTO.CategoryId = productsEntity.CategoryId;
     }
-    public Task UpdateProduct(ProductDTO productDTO)
+    public async Task UpdateProduct(ProductDTO productDTO)
     {
-        throw new NotImplementedException();
+        var productsEntity = _mapper.Map<Product>(productDTO);
+        await _productRepository.Create(productsEntity);
     }
 
-    public Task DeleteProduct(int id)
+    public async Task DeleteProduct(int id)
     {
-        throw new NotImplementedException();
+        var productsEntity = GetProductById(id).Result;
+        await _productRepository.Delete(productsEntity.Id);
     }
 }
