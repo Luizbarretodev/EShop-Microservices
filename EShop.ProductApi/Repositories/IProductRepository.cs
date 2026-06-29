@@ -4,7 +4,7 @@ namespace EShop.ProductApi.Repositories;
 
 public interface IProductRepository
 {
-    Task<IEnumerable<Product>> GetProducts();
+    Task<IEnumerable<Product>> GetAll();
 
     Task<Product> GetById(int id);
 

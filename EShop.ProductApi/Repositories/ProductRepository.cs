@@ -14,7 +14,7 @@ public class ProductRepository : IProductRepository
     }
 
 
-    public async Task<IEnumerable<Product>> GetProducts()
+    public async Task<IEnumerable<Product>> GetAll()
     {
         //Não é recomendávek usar ToListAsync pois ele retorna todas as categorias na memoria
         //estamos utilizando apenas por ter poucas categorias

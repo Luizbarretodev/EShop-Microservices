@@ -1,6 +1,6 @@
-﻿namespace EShop.ProductApi.Services
+﻿namespace EShop.ProductApi.Services;
+
+public interface IProductService
 {
-    public interface IProductService
-    {
-    }
+
 }

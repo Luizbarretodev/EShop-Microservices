@@ -1,6 +1,8 @@
-﻿namespace EShop.ProductApi.Services
+﻿using EShop.ProductApi.DTOs;
+
+namespace EShop.ProductApi.Services;
+
+public interface ICategoryService
 {
-    public interface ICategoryService
-    {
-    }
+    Task<IEnumerable<CategoryDTO>> GetCategories();
 }
