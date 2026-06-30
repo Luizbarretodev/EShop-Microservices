@@ -62,7 +62,7 @@ namespace EShop.ProductApi.Controllers
                                             categoryDTO);
         }
 
-        [HttpPut("id:int")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Put(int id, [FromBody] CategoryDTO categoryDTO)
         {
             if (id != categoryDTO.CategoryId)
@@ -76,7 +76,7 @@ namespace EShop.ProductApi.Controllers
             return Ok(categoryDTO);
         }
 
-        [HttpDelete("id:int")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             var categoryDTO = await _categoryService.GetCategoryById(id);
