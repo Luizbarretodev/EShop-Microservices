@@ -24,26 +24,26 @@ public class ProductService : IProductService
 
     public async Task<ProductDTO> GetProductById(int id)
     {
-        var productsEntity = await _productRepository.GetById(id);
-        return _mapper.Map<ProductDTO>(productsEntity);
+        var productEntity = await _productRepository.GetById(id);
+        return _mapper.Map<ProductDTO>(productEntity);
     }
 
     public async Task AddProduct(ProductDTO productDTO)
     {
-        var productsEntity = _mapper.Map<Product>(productDTO);
-        await _productRepository.Create(productsEntity);
+        var productEntity = _mapper.Map<Product>(productDTO);
+        await _productRepository.Create(productEntity);
 
-        productDTO.CategoryId = productsEntity.CategoryId;
+        productDTO.CategoryId = productEntity.CategoryId;
     }
     public async Task UpdateProduct(ProductDTO productDTO)
     {
-        var productsEntity = _mapper.Map<Product>(productDTO);
-        await _productRepository.Create(productsEntity);
+        var productEntity = _mapper.Map<Product>(productDTO);
+        await _productRepository.Create(productEntity);
     }
 
     public async Task DeleteProduct(int id)
     {
-        var productsEntity = GetProductById(id).Result;
-        await _productRepository.Delete(productsEntity.Id);
+        var productEntity = GetProductById(id).Result;
+        await _productRepository.Delete(productEntity.Id);
     }
 }
