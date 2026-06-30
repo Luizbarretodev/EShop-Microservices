@@ -30,26 +30,26 @@ public class CategoryService : ICategoryService
 
     public async Task<CategoryDTO> GetCategoryById(int id)
     {
-        var categoriesEntity = await _categoryRepository.GetById(id);
-        return _mapper.Map<CategoryDTO>(categoriesEntity);
+        var categoryEntity = await _categoryRepository.GetById(id);
+        return _mapper.Map<CategoryDTO>(categoryEntity);
     }
 
     public async Task AddCategory(CategoryDTO categoryDTO)
     {
-        var categoriesEntity = _mapper.Map<Category>(categoryDTO);
-        await _categoryRepository.Create(categoriesEntity);
-        categoryDTO.CategoryId = categoriesEntity.CategoryId;
+        var categoryEntity = _mapper.Map<Category>(categoryDTO);
+        await _categoryRepository.Create(categoryEntity);
+        categoryDTO.CategoryId = categoryEntity.CategoryId;
     }
 
     public async Task UpdateCategory(CategoryDTO categoryDTO)
     {
-        var categoriesEntity = _mapper.Map<Category>(categoryDTO);
-        await _categoryRepository.Update(categoriesEntity);
+        var categoryEntity = _mapper.Map<Category>(categoryDTO);
+        await _categoryRepository.Update(categoryEntity);
     }
 
     public async Task DeleteCategory(int id)
     {
-        var categoriesEntity = GetCategoryById(id).Result;
-        await _categoryRepository.Delete(categoriesEntity.CategoryId);
+        var categoryEntity = GetCategoryById(id).Result;
+        await _categoryRepository.Delete(categoryEntity.CategoryId);
     }
 }
