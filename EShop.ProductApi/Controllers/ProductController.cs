@@ -51,7 +51,7 @@ namespace EShop.ProductApi.Controllers
                                             productDTO);
         }
 
-        [HttpPut("id:int")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Put(int id, [FromBody] ProductDTO productDTO)
         {
             if (id != productDTO.CategoryId)
@@ -65,7 +65,7 @@ namespace EShop.ProductApi.Controllers
             return Ok(productDTO);
         }
 
-        [HttpDelete("id:int")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             var productDTO = await _productService.GetProductById(id);
