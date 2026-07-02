@@ -1,5 +1,6 @@
 ﻿using EShop.ProductApi.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EShop.ProductApi.DTOs;
 
@@ -21,6 +22,7 @@ public class ProductDTO
     public long Stock { get; set; }
     public string? ImageURL { get; set; }
 
+    [JsonIgnore]
     public Category? Category { get; set; }
     public int CategoryId { get; set; }
 }
