@@ -44,7 +44,7 @@ namespace EShop.Web.Controllers
             {
                 var result = await _productService.CreateProduct(productVM);
 
-                if (result is null)
+                if (result != null)
                 {
                     return RedirectToAction(nameof(Index));
                 }
