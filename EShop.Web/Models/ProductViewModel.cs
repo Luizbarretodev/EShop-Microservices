@@ -9,5 +9,5 @@ public class ProductViewModel
     public long Stock { get; set; }
     public string? ImageURL { get; set; }
     public string? CategoryName { get; set; }
-    public string? CategoryId { get; set; }
+    public int? CategoryId { get; set; }
 }
