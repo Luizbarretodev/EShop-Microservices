@@ -1,0 +1,41 @@
+﻿@model IEnumerable<EShop.Web.Models.ProductViewModel>
+
+<div class="container">
+    <h2 class="mb-3">Products</h2>
+    <hr />
+    <a asp-action="CreateProduct" class="btn btn-primary mb-3">
+        <i class="fa-solid fa-plus"></i> New Product
+    </a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.CategoryName</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price.ToString("F2")</td>
+                    <td>
+                        <a asp-action="UpdateProduct" asp-route-id="@product.Id"
+                           class="btn btn-warning btn-sm">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a asp-action="DeleteProduct" asp-route-id="@product.Id"
+                           class="btn btn-danger btn-sm">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
