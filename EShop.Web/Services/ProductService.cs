@@ -15,30 +15,46 @@ public class ProductService : IProductService
     public ProductService(IHttpClientFactory clientFactory)
     {
         _clientFactory = clientFactory;
-        _options = new JsonSerializerOptions {PropertyNameCaseInsensitive = true };
+        _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     }
 
-    public Task<IEnumerable<ProductViewModel>> GetAllProducts()
+    public async Task<IEnumerable<ProductViewModel>> GetAllProducts()
+    {
+        var client = _clientFactory.CreateClient("ProductApi");
+
+        using (var response = await client.GetAsync(apiEndPoint))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var apiResponse = await response.Content.ReadAsStreamAsync();
+
+                productsVM = await JsonSerializer.DeserializeAsync<IEnumerable<ProductViewModel>>(apiResponse, _options);
+            }
+            else
+            {
+                return null;
+            }
+
+            return productsVM;
+        }
+    }
+
+    public async Task<ProductViewModel> FindProductById(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ProductViewModel> FindProductById(int id)
+    public async Task<ProductViewModel> CreateProduct(ProductViewModel productVM)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ProductViewModel> CreateProduct(ProductViewModel productVM)
+    public async Task<ProductViewModel> UpdateProduct(ProductViewModel productVM)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ProductViewModel> UpdateProduct(ProductViewModel productVM)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> DeleteProductById(int id)
+    public async Task<bool> DeleteProductById(int id)
     {
         throw new NotImplementedException();
     }
