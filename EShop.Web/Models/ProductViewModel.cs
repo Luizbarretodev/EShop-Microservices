@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EShop.Web.Models;
 
@@ -15,6 +16,8 @@ public class ProductViewModel
     public long Stock { get; set; }
     [Required]
     public string? ImageURL { get; set; }
+
+    [Display(Name ="Categories")]
     public string? CategoryName { get; set; }
     public int? CategoryId { get; set; }
 }
