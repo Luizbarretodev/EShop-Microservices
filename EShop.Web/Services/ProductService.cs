@@ -1,5 +1,6 @@
 ﻿using EShop.Web.Models;
 using EShop.Web.Services.Contracts;
+using System.Text;
 using System.Text.Json;
 
 namespace EShop.Web.Services;
@@ -41,21 +42,87 @@ public class ProductService : IProductService
 
     public async Task<ProductViewModel> FindProductById(int id)
     {
-        throw new NotImplementedException();
+        var client = _clientFactory.CreateClient("ProductApi");
+
+        using (var response = await client.GetAsync(apiEndPoint + id))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var apiResponse = await response.Content.ReadAsStreamAsync();
+
+                productVM = await JsonSerializer.DeserializeAsync<ProductViewModel>(apiResponse, _options);
+            }
+            else
+            {
+                return null;
+            }
+
+            return productVM;
+        }
     }
 
     public async Task<ProductViewModel> CreateProduct(ProductViewModel productVM)
     {
-        throw new NotImplementedException();
+        var content = new StringContent(
+        JsonSerializer.Serialize(productVM),
+        Encoding.UTF8,
+        "application/json");
+
+        var client = _clientFactory.CreateClient("ProductApi");
+
+        using (var response = await client.PostAsync(apiEndPoint, content))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var apiResponse = await response.Content.ReadAsStreamAsync();
+
+                productVM = await JsonSerializer.DeserializeAsync<ProductViewModel>(apiResponse, _options);
+            }
+            else
+            {
+                return null;
+            }
+
+            return productVM;
+        }
     }
 
     public async Task<ProductViewModel> UpdateProduct(ProductViewModel productVM)
     {
-        throw new NotImplementedException();
+        var client = _clientFactory.CreateClient("ProductApi");
+        ProductViewModel productUpdated = new ProductViewModel();
+
+        using (var response = await client.PutAsJsonAsync(apiEndPoint, productUpdated))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var apiResponse = await response.Content.ReadAsStreamAsync();
+
+                productUpdated = await JsonSerializer.DeserializeAsync<ProductViewModel>(apiResponse, _options);
+            }
+            else
+            {
+                return null;
+            }
+
+            return productUpdated;
+        }
     }
 
     public async Task<bool> DeleteProductById(int id)
     {
-        throw new NotImplementedException();
+        var client = _clientFactory.CreateClient("ProductApi");
+
+        using (var response = await client.DeleteAsync(apiEndPoint + id))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+               return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
