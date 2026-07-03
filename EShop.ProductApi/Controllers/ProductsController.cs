@@ -51,12 +51,9 @@ namespace EShop.ProductApi.Controllers
                                             productDTO);
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> Put(int id, [FromBody] ProductDTO productDTO)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] ProductDTO productDTO)
         {
-            if (id != productDTO.CategoryId)
-                return BadRequest("Invalid data");
-
             if (productDTO == null)
                 return BadRequest("Invalid data");
 
