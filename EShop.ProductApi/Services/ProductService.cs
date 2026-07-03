@@ -38,7 +38,7 @@ public class ProductService : IProductService
     public async Task UpdateProduct(ProductDTO productDTO)
     {
         var productEntity = _mapper.Map<Product>(productDTO);
-        await _productRepository.Create(productEntity);
+        await _productRepository.Update(productEntity);
     }
 
     public async Task DeleteProduct(int id)
