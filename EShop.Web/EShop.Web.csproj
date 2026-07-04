@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EShop.ProductApi\EShop.ProductApi.csproj" />
+  </ItemGroup>
+
 </Project>
