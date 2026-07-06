@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{02
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{60A5A188-747A-40C8-93F8-854BB1063256}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.IdentityServer", "EShop.IdentityServer\EShop.IdentityServer.csproj", "{1BBE75C7-2F46-4CB3-8D8E-C3613710BC06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.AuthApi", "EShop.IdentityServer\EShop.AuthApi.csproj", "{1BBE75C7-2F46-4CB3-8D8E-C3613710BC06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
