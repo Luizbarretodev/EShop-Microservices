@@ -1,6 +1,0 @@
-@EShop.IdentityServer_HostAddress = http://localhost:5056
-
-GET {{EShop.IdentityServer_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
