@@ -29,6 +29,7 @@ namespace EShop.ProductApi.Controllers
         }
 
         [HttpGet("{id:int}", Name = "GetProduct")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetById(int id)
         {
             var productDTO = await _productService.GetProductById(id);
