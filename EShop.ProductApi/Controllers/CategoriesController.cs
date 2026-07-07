@@ -1,5 +1,6 @@
 ﻿using EShop.ProductApi.DTOs;
 using EShop.ProductApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,6 +51,7 @@ namespace EShop.ProductApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post([FromBody] CategoryDTO categoryDTO)
         {
             if (categoryDTO == null)
@@ -63,6 +65,7 @@ namespace EShop.ProductApi.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Put(int id, [FromBody] CategoryDTO categoryDTO)
         {
             if (id != categoryDTO.CategoryId)
@@ -77,6 +80,7 @@ namespace EShop.ProductApi.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var categoryDTO = await _categoryService.GetCategoryById(id);
