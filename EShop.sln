@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{02
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{60A5A188-747A-40C8-93F8-854BB1063256}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.AuthApi", "EShop.AuthApi\EShop.AuthApi.csproj", "{181481E6-1D2C-46E5-A906-095E98397CB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{A3020EC7-1805-47ED-8E18-2F97B363F5DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3020EC7-1805-47ED-8E18-2F97B363F5DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3020EC7-1805-47ED-8E18-2F97B363F5DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{181481E6-1D2C-46E5-A906-095E98397CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{181481E6-1D2C-46E5-A906-095E98397CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{181481E6-1D2C-46E5-A906-095E98397CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{181481E6-1D2C-46E5-A906-095E98397CB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{42FC7307-317A-4FBB-9EA1-D98D7E5DE344} = {60A5A188-747A-40C8-93F8-854BB1063256}
 		{A3020EC7-1805-47ED-8E18-2F97B363F5DD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{181481E6-1D2C-46E5-A906-095E98397CB3} = {60A5A188-747A-40C8-93F8-854BB1063256}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {041498D2-827C-407C-8AB3-AB507B6BB33D}
