@@ -6,7 +6,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configura o banco de dados com a connectionString
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+    options.UseMySql(
+        connection,
+        ServerVersion.AutoDetect(connection));
+});
 
 // configura o aspnetcore com identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
