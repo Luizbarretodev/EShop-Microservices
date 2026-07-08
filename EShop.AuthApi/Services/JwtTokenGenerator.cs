@@ -20,7 +20,7 @@ namespace EShop.AuthApi.Services
             var tokenHandler = new JwtSecurityTokenHandler();
 
             // aqui pega a chave secreta definida no appsettings.json
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Secret"]!);
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]!);
 
             // Definimos as Claims embutidas no token
             var claimList = new List<Claim>
@@ -36,7 +36,7 @@ namespace EShop.AuthApi.Services
                 Issuer = _configuration["Jwt:Issuer"],
                 Subject = new ClaimsIdentity(claimList),
                 Expires = DateTime.UtcNow.AddDays(7), 
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
