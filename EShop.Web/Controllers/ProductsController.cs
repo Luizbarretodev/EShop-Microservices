@@ -1,5 +1,6 @@
 ﻿using EShop.Web.Models;
 using EShop.Web.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -29,6 +30,7 @@ namespace EShop.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateProduct()
         {
             ViewBag.CategoryId = new SelectList(await
@@ -59,6 +61,7 @@ namespace EShop.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateProduct(int id)
         {
             ViewBag.CategoryId = new SelectList(await
@@ -87,6 +90,7 @@ namespace EShop.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var result = await _productService.FindProductById(id);

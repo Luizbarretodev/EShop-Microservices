@@ -3,6 +3,8 @@ using EShop.Web.Services.Contracts;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace EShop.Web.Controllers
@@ -31,10 +33,15 @@ namespace EShop.Web.Controllers
                 return View(loginVM);
             }
 
+            var handler = new JwtSecurityTokenHandler();
+            var jwt = handler.ReadJwtToken(user.Token);
+            var role = jwt.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value ?? "Client";
+
             var claims = new List<Claim>
             {
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, role),
             new Claim("Token", user.Token)
             };
 

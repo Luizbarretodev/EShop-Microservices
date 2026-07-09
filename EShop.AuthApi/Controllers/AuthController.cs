@@ -11,9 +11,10 @@ namespace EShop.AuthApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IJwtTokenGenerator _tokenGenerator;
 
-        public AuthController(UserManager<IdentityUser> userManager, IJwtTokenGenerator tokenGenerator)
+        public AuthController(UserManager<IdentityUser> userManager,RoleManager<IdentityUser> roleManager, IJwtTokenGenerator tokenGenerator)
         {
             _userManager = userManager;
             _tokenGenerator = tokenGenerator;
@@ -34,6 +35,12 @@ namespace EShop.AuthApi.Controllers
 
             if (result.Succeeded)
             {
+                //se o usuario não tiver role, cria
+                if (!await _roleManager.RoleExistsAsync(model.Role))
+                    await _roleManager.CreateAsync(new IdentityRole(model.Role));
+
+                //atribui a role ao usuario
+                await _userManager.AddToRoleAsync(user, model.Role);
                 return Ok("Usuário registrado com sucesso!");
             }
 
@@ -51,8 +58,11 @@ namespace EShop.AuthApi.Controllers
                 return BadRequest("Email ou senha inválidos");
             }
 
+            // adiciona as roles ao usuario
+            var roles = await _userManager.GetRolesAsync(user);
+
             // gera o token para o usuário autenticado
-            var token = _tokenGenerator.GenerateToken(user);
+            var token = _tokenGenerator.GenerateToken(user, roles);
 
             return Ok(new
             {

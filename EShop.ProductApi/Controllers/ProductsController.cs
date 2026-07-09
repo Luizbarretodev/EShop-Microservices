@@ -41,7 +41,7 @@ namespace EShop.ProductApi.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Post([FromBody] ProductDTO productDTO)
         {
             if (productDTO == null)
@@ -55,7 +55,7 @@ namespace EShop.ProductApi.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put([FromBody] ProductDTO productDTO)
         {
             if (productDTO == null)
@@ -67,7 +67,7 @@ namespace EShop.ProductApi.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var productDTO = await _productService.GetProductById(id);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -15,7 +16,7 @@ namespace EShop.AuthApi.Services
             _configuration = configuration;
         }
 
-        public string GenerateToken(IdentityUser applicationUser)
+        public string GenerateToken(IdentityUser applicationUser, IList<string> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -29,6 +30,10 @@ namespace EShop.AuthApi.Services
                 new Claim(JwtRegisteredClaimNames.Sub, applicationUser.Id),
                 new Claim(JwtRegisteredClaimNames.Name, applicationUser.UserName!)
             };
+
+            //adiciona as roles
+            foreach (var role in roles)
+                claimList.Add(new Claim(ClaimTypes.Role, role));
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
