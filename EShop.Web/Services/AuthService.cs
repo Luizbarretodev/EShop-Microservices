@@ -1,10 +1,11 @@
 ﻿using EShop.Web.Models;
+using EShop.Web.Services.Contracts;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace EShop.Web.Services;
 
-public class AuthService
+public class AuthService : IAuthService
 {
     private readonly IHttpClientFactory _clientFactory;
     private readonly JsonSerializerOptions _options;
