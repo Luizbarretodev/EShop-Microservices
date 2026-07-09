@@ -1,5 +1,6 @@
 ﻿using EShop.Web.Models;
 using EShop.Web.Services.Contracts;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -8,15 +9,27 @@ namespace EShop.Web.Services;
 public class ProductService : IProductService
 {
     private readonly IHttpClientFactory _clientFactory;
+    private readonly IHttpContextAccessor _contextAccessor;
     private const string apiEndPoint = "/api/products/";
     private readonly JsonSerializerOptions _options;
     private ProductViewModel productVM;
     private IEnumerable<ProductViewModel> productsVM;
 
-    public ProductService(IHttpClientFactory clientFactory)
+    public ProductService(IHttpClientFactory clientFactory, IHttpContextAccessor contextAccessor)
     {
         _clientFactory = clientFactory;
+        _contextAccessor = contextAccessor;
         _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+    }
+
+    public void AddAuthorization(HttpClient client)
+    {
+        var token = _contextAccessor.HttpContext.User.FindFirst("Token").Value;
+
+        if (!string.IsNullOrEmpty(token))
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
     }
 
     public async Task<IEnumerable<ProductViewModel>> GetAllProducts()
@@ -43,6 +56,7 @@ public class ProductService : IProductService
     public async Task<ProductViewModel> FindProductById(int id)
     {
         var client = _clientFactory.CreateClient("ProductApi");
+        AddAuthorization(client);
 
         using (var response = await client.GetAsync(apiEndPoint + id))
         {
@@ -69,6 +83,7 @@ public class ProductService : IProductService
         "application/json");
 
         var client = _clientFactory.CreateClient("ProductApi");
+        AddAuthorization(client);
 
         using (var response = await client.PostAsync(apiEndPoint, content))
         {
@@ -90,6 +105,7 @@ public class ProductService : IProductService
     public async Task<ProductViewModel> UpdateProduct(ProductViewModel productVM)
     {
         var client = _clientFactory.CreateClient("ProductApi");
+        AddAuthorization(client);
         ProductViewModel productUpdated = new ProductViewModel();
 
         using (var response = await client.PutAsJsonAsync(apiEndPoint, productVM))
@@ -112,6 +128,7 @@ public class ProductService : IProductService
     public async Task<bool> DeleteProductById(int id)
     {
         var client = _clientFactory.CreateClient("ProductApi");
+        AddAuthorization(client);
 
         using (var response = await client.DeleteAsync(apiEndPoint + id))
         {
