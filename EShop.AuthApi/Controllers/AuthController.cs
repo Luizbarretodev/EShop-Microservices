@@ -14,7 +14,7 @@ namespace EShop.AuthApi.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IJwtTokenGenerator _tokenGenerator;
 
-        public AuthController(UserManager<IdentityUser> userManager,RoleManager<IdentityUser> roleManager, IJwtTokenGenerator tokenGenerator)
+        public AuthController(UserManager<IdentityUser> userManager,RoleManager<IdentityRole> roleManager, IJwtTokenGenerator tokenGenerator)
         {
             _userManager = userManager;
             _tokenGenerator = tokenGenerator;
