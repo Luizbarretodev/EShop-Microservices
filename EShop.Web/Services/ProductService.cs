@@ -56,7 +56,6 @@ public class ProductService : IProductService
     public async Task<ProductViewModel> FindProductById(int id)
     {
         var client = _clientFactory.CreateClient("ProductApi");
-        AddAuthorization(client);
 
         using (var response = await client.GetAsync(apiEndPoint + id))
         {
