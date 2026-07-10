@@ -35,7 +35,12 @@ namespace EShop.Web.Controllers
 
             var handler = new JwtSecurityTokenHandler();
             var jwt = handler.ReadJwtToken(user.Token);
-            var role = jwt.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value ?? "Client";
+            foreach (var claim in jwt.Claims)
+            {
+                Console.WriteLine($"{claim.Type} = {claim.Value}");
+            }
+            var role = jwt.Claims.FirstOrDefault(c =>
+    c.Type == ClaimTypes.Role || c.Type == "role")?.Value ?? "Client";
 
             var claims = new List<Claim>
             {
