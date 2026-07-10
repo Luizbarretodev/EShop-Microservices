@@ -23,7 +23,7 @@ public static class IdentitySeed
             }
         }
         
-        var adminEmail = "admin@eshop.com";
+        var adminEmail = "admin@email.com";
 
         var admin = await userManager.FindByEmailAsync(adminEmail);
 
