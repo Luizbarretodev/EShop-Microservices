@@ -10,4 +10,8 @@
     <ProjectReference Include="..\EShop.ProductApi\EShop.ProductApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>

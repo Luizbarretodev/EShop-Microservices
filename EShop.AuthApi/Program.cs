@@ -1,4 +1,5 @@
 using EShop.AuthApi.Data;
+using EShop.AuthApi.Seed;
 using EShop.AuthApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -96,6 +97,13 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    await IdentitySeed.SeedAsync(services);
+}
 
 if (app.Environment.IsDevelopment())
 {
