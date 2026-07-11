@@ -1,4 +1,5 @@
 using EShop.CartApi.Context;
+using EShop.CartApi.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -51,6 +52,8 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
