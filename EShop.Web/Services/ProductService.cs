@@ -109,6 +109,11 @@ public class ProductService : IProductService
 
         using (var response = await client.PutAsJsonAsync(apiEndPoint, productVM))
         {
+            Console.WriteLine(response.StatusCode);
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(json);
             if (response.IsSuccessStatusCode)
             {
                 var apiResponse = await response.Content.ReadAsStreamAsync();

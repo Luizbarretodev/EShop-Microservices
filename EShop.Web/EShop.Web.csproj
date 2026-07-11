@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <None Include="wwwroot\images\Clips.jpg" />
+    <None Include="wwwroot\images\Notebook.jpg" />
+    <None Include="wwwroot\images\Pencil.jpg" />
   </ItemGroup>
 
 </Project>
