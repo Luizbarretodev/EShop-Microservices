@@ -25,14 +25,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 var secret = builder.Configuration["Jwt:Secret"]!;
-Console.WriteLine($"ProductAPI Secret: '{secret}'");
-Console.WriteLine($"ProductAPI Key Length: {secret.Length}");
-Console.WriteLine($"ProductAPI Secret: '{secret}'");
-Console.WriteLine($"ProductAPI Key Length: {secret.Length}");
-Console.WriteLine($"ProductAPI Secret: '{secret}'");
-Console.WriteLine($"ProductAPI Key Length: {secret.Length}");
-Console.WriteLine($"ProductAPI Secret: '{secret}'");
-Console.WriteLine($"ProductAPI Key Length: {secret.Length}");
+
 var key = Encoding.UTF8.GetBytes(secret);
 
 builder.Services
