@@ -14,9 +14,13 @@ public class ProductViewModel
     public string? Description { get; set; }
     [Required]
     public long Stock { get; set; }
+    [Display(Name = "Image URL")]
     public string? ImageURL { get; set; }
 
     [Display(Name ="Categories")]
     public string? CategoryName { get; set; }
+    public int Quantity { get; set; } = 1;
+
+    [Display(Name = "Category")]
     public int? CategoryId { get; set; }
 }
