@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EShop.CartApi\EShop.CartApi.csproj" />
     <ProjectReference Include="..\EShop.ProductApi\EShop.ProductApi.csproj" />
   </ItemGroup>
 
