@@ -34,9 +34,15 @@ builder.Services.AddHttpClient("AuthApi", c =>
     c.BaseAddress = new Uri(builder.Configuration["ServiceUri:AuthApi"]!);
 });
 
+builder.Services.AddHttpClient("CartApi", c =>
+{
+    c.BaseAddress = new Uri(builder.Configuration["ServiceUri:CartApi"]);
+});
+
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddHttpContextAccessor();
 

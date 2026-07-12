@@ -12,4 +12,6 @@ public interface ICartService
     Task<bool> ApplyCouponAsync(CartViewModel cartVM, string coupon);
     Task<bool> RemoveCouponAsync(int id);
     Task<bool> CleanCartAsync(int id);
+
+    Task<CartViewModel> CheckoutAsync(CartViewModel cartVM);
 }
