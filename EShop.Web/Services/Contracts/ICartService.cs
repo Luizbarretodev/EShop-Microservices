@@ -4,7 +4,7 @@ namespace EShop.Web.Services;
 
 public interface ICartService
 {
-    Task<CartViewModel> GetCartByUserId(int id);
+    Task<CartViewModel> GetCartByUserIdAsync(string userid);
     Task<CartViewModel> AddItemToCartAsync(CartViewModel cartVM);
     Task<CartViewModel> UpdateCartAsync(CartViewModel cartVM);
     Task<bool> RemoveItemFromCartAsync(int id);

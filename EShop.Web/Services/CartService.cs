@@ -85,12 +85,12 @@ public class CartService : ICartService
         }
     }
 
-    public async Task<bool> RemoveItemFromCartAsync(int id)
+    public async Task<bool> RemoveItemFromCartAsync(int cartId)
     {
         var client = _clientFactory.CreateClient("CartApi");
         AddAuthorizationHeader(client);
 
-        using var response = await client.DeleteAsync($"{apiEndpoint}/deletecart/" + id);
+        using var response = await client.DeleteAsync($"{apiEndpoint}/deletecart/" + cartId);
         if (response.IsSuccessStatusCode)
         {
             return true;
@@ -131,4 +131,5 @@ public class CartService : ICartService
             client.DefaultRequestHeaders.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
     }
+
 }
