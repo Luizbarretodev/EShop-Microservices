@@ -8,5 +8,5 @@ public class CartHeaderViewModel
     public string UserId { get; set; } = string.Empty;
     public string CoupounCode { get; set; } = string.Empty;
 
-    public double TotalAmout { get; set; } = 0.00d;
+    public decimal TotalAmout { get; set; } = 0.00m;
 }
