@@ -35,12 +35,23 @@ public class CartController : Controller
         {
             foreach(var item in cart.CartItems)
             {
-                cart.CartHeader.TotalAmout += (item.Product.Price * item.Quantity);
+                cart.CartHeader.TotalAmount += (item.Product.Price * item.Quantity);
             }
         }
 
         return cart;
     }
+
+    public async Task<IActionResult> RemoveItem(int id)
+    {
+        var result = await _cartService.RemoveItemFromCartAsync(id);
+        if (result)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        return View(id);
+    }
+
 
     private string GetUserId()
     {
