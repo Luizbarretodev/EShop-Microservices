@@ -14,6 +14,32 @@ public class CartController : Controller
         _cartService = cartService;
     }
 
+    [HttpPost]
+    public async Task<IActionResult> ApplyCoupon(CartViewModel cartVM)
+    {
+        if (ModelState.IsValid)
+        {
+            var result = await _cartService.ApplyCouponAsync(cartVM);
+            if (result)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+        }
+        return View();  
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteCoupon()
+    {
+        var result = await _cartService.RemoveCouponAsync(GetUserId());
+
+        if (result)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        return View(); 
+    }
+
     [Authorize]
     public async Task<IActionResult> Index()
     {
