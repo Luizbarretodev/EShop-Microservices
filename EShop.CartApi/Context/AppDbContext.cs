@@ -54,7 +54,7 @@ public class AppDbContext : DbContext
                 IsRequired();
 
         mb.Entity<CartHeader>().
-            Property(c => c.CoupounCode).
+            Property(c => c.CouponCode).
                 HasMaxLength(100);
     }
 }
