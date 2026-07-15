@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace EShop.CartApi.DTOs;
 
-namespace EShop.Web.Models;
-
-public class CartHeaderViewModel
+public class CheckoutHeaderDTO
 {
     public int Id { get; set; }
     public string UserId { get; set; } = string.Empty;
     public string CouponCode { get; set; } = string.Empty;
 
     public decimal TotalAmount { get; set; } = 0.00m;
+
 
     public decimal Discount { get; set; } = 0.00m;
 
@@ -18,11 +17,11 @@ public class CartHeaderViewModel
     public DateTime DateTime { get; set; }
     public string Telephone { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
-
-
     public string CardNumber { get; set; } = string.Empty;
     public string NameOnCard { get; set; } = string.Empty;
     public string CVV { get; set; } = string.Empty;
-    public string ExpireMonthYear { get; set; } = string.Empty;
+    public string ExpireMothYear { get; set; } = string.Empty;
 
+    public int CartTotalItens { get; set; }
+    public IEnumerable<CartItemDTO>? CartItems { get; set; }
 }

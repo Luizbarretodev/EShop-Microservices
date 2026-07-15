@@ -18,32 +18,6 @@ public class CartController : Controller
         _couponService = couponService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> ApplyCoupon(CartViewModel cartVM)
-    {
-        if (ModelState.IsValid)
-        {
-            var result = await _cartService.ApplyCouponAsync(cartVM);
-            if (result)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-        }
-        return View();  
-    }
-
-    [HttpDelete]
-    public async Task<IActionResult> DeleteCoupon()
-    {
-        var result = await _cartService.RemoveCouponAsync(GetUserId());
-
-        if (result)
-        {
-            return RedirectToAction(nameof(Index));
-        }
-        return View(); 
-    }
-
     [Authorize]
     public async Task<IActionResult> Index()
     {
@@ -92,6 +66,62 @@ public class CartController : Controller
             return RedirectToAction(nameof(Index));
         }
         return View(id);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ApplyCoupon(CartViewModel cartVM)
+    {
+        if (ModelState.IsValid)
+        {
+            var result = await _cartService.ApplyCouponAsync(cartVM);
+            if (result)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+        }
+        return View();
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteCoupon()
+    {
+        var result = await _cartService.RemoveCouponAsync(GetUserId());
+
+        if (result)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        return View();
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> Checkout()
+    {
+        CartViewModel cartVM = await GetCartByUser();
+
+        return View(cartVM);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Checkout(CartViewModel cartVM)
+    {
+        if (ModelState.IsValid)
+        {
+            var result = await _cartService.CheckoutAsync(cartVM.CartHeader);
+
+            if (result != null)
+            {
+                return RedirectToAction(nameof(CheckoutCompleted));
+            }
+        }
+        return View(cartVM);
+    }
+
+    [HttpGet]
+    public IActionResult CheckoutCompleted()
+    {
+        return View();
     }
 
 

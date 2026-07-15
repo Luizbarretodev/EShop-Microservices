@@ -13,5 +13,5 @@ public interface ICartService
     Task<bool> ApplyCouponAsync(CartViewModel cartVM);
     Task<bool> RemoveCouponAsync(string id);
 
-    Task<CartViewModel> CheckoutAsync(CartViewModel cartVM);
+    Task<CartHeaderViewModel> CheckoutAsync(CartHeaderViewModel cartVM);
 }

@@ -1,4 +1,5 @@
-﻿using EShop.Web.Models;
+﻿using EShop.CartApi.Models;
+using EShop.Web.Models;
 using Microsoft.AspNetCore.Http;
 using System.Text;
 using System.Text.Json;
@@ -142,11 +143,30 @@ public class CartService : ICartService
         return false;
     }
 
-    public async Task<CartViewModel> CheckoutAsync(CartViewModel cartVM)
+    public async Task<CartHeaderViewModel> CheckoutAsync(CartHeaderViewModel cartHeaderVM)
     {
-        throw new NotImplementedException();
-    }
+        var client = _clientFactory.CreateClient("CartApi");
+        AddAuthorizationHeader(client);
 
+        StringContent content = new StringContent(JsonSerializer.Serialize(cartHeaderVM),
+                                             Encoding.UTF8, "application/json");
+
+        using (var response = await client.PostAsync($"{apiEndpoint}/checkout/", content))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                var apiResponse = await response.Content.ReadAsStreamAsync();
+                cartHeaderVM = await JsonSerializer
+                              .DeserializeAsync<CartHeaderViewModel>
+                              (apiResponse, _options);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        return cartHeaderVM;
+    }
 
     private void AddAuthorizationHeader(HttpClient client)
     {
@@ -157,5 +177,4 @@ public class CartService : ICartService
             client.DefaultRequestHeaders.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
     }
-
 }
