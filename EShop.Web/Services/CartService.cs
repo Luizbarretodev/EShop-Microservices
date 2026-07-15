@@ -101,19 +101,45 @@ public class CartService : ICartService
         }
     }
 
-    public async Task<bool> ApplyCouponAsync(CartViewModel cartVM, string coupon)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<bool> RemoveCouponAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<bool> CleanCartAsync(int id)
     {
         throw new NotImplementedException();
+    }
+
+
+    public async Task<bool> ApplyCouponAsync(CartViewModel cartVM)
+    {
+        var client = _clientFactory.CreateClient("CartApi");
+        AddAuthorizationHeader(client);
+
+        StringContent content = new StringContent(JsonSerializer.Serialize(cartVM),
+                                                  Encoding.UTF8, "application/json");
+
+        using (var response = await client.PostAsync($"{apiEndpoint}/applycoupon/", content))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public async Task<bool> RemoveCouponAsync(string userId)
+    {
+        var client = _clientFactory.CreateClient("CartApi");
+        AddAuthorizationHeader(client);
+
+        using (var response = await client.DeleteAsync($"{apiEndpoint}/deletecoupon/{userId}"))
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public async Task<CartViewModel> CheckoutAsync(CartViewModel cartVM)
