@@ -66,7 +66,7 @@ public class CartRepository : ICartRepository
 
         if (cartHeader != null)
         {
-            _context.cartItems.RemoveRange(_context.cartItems.Where(c => c.CartHeaderId == cartHeader.Id)) ;
+            _context.cartItems.RemoveRange(_context.cartItems.Where(c => c.CartHeaderId == cartHeader.Id));
 
             _context.cartHeaders.Remove(cartHeader);
 
@@ -105,11 +105,35 @@ public class CartRepository : ICartRepository
     //Logica dos cupons
     public async Task<bool> ApplyCouponAsync(string userId, string couponCode)
     {
-        throw new NotImplementedException();
+        var cartHeaderApplyCoupon = await _context.cartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
+
+        if (cartHeaderApplyCoupon == null)
+        {
+            return false;
+        }
+
+        cartHeaderApplyCoupon.CouponCode = couponCode;
+
+        _context.cartHeaders.Update(cartHeaderApplyCoupon);
+
+        await _context.SaveChangesAsync();
+        return true;
     }
     public async Task<bool> DeleteCouponAsync(string userId)
     {
-        throw new NotImplementedException();
+        var cartHeaderDeleteCoupon = await _context.cartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
+
+        if (cartHeaderDeleteCoupon == null)
+        {
+            return false;
+        }
+
+        cartHeaderDeleteCoupon.CouponCode = "";
+
+        _context.cartHeaders.Update(cartHeaderDeleteCoupon);
+
+        await _context.SaveChangesAsync();
+        return true;
     }
 
     //Meotodos usados em UpdateCartAsync
