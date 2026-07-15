@@ -2,6 +2,7 @@
 using EShop.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EShop.Web.Controllers;
 
@@ -55,6 +56,6 @@ public class CartController : Controller
 
     private string GetUserId()
     {
-        return User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault().Value;
+        return User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     }
 }
